@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habilidades</title>
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/dist/css/adminlte.min.css' %}">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        {% include 'navbar.html' %}
+        
+        <!-- Sidebar -->
+        {% include 'sidebar.html' %}
+        
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Tabela de Acertos e Erros dos Professores</h1>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Upload Form -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Upload de Arquivo CSV</h5>
+                                    <form action="{% url 'upload_habilidades' %}" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input type="file" name="excel_file" accept=".xlsx">
+                                        <button type="submit" class="btn btn-primary">Upload Excel</button>
+                                    </form>
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.upload form -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Habilidade</th>
+                                                <th>401</th>
+                                                <th>403</th>
+                                                <th>404</th>
+                                                <th>406</th>
+                                                <th>408</th>
+                                                <th>409</th>
+                                                <th>410</th>
+                                                <th>413</th>
+                                                <th>414</th>
+                                                <th>415</th>
+                                                <th>417</th>
+                                                <th>421</th>
+                                                <th>423</th>
+                                                <th>426</th>
+                                                <th>428</th>
+                                                <th>429</th>
+                                                <th>430</th>
+                                                <th>431</th>
+                                                <th>432</th>
+                                                <th>433</th>
+                                                <th>434</th>
+                                                <th>435</th>
+                                                <th>436</th>
+                                                <th>437</th>
+                                                <th>438</th>
+                                                <th>439</th>
+                                                <th>441</th>
+                                                <th>442</th>
+                                                <th>447</th>
+                                                <th>451</th>
+                                                <th>471</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for habilidade in habilidades %}
+                                                <tr>
+                                                    <td>{{ habilidade.item }}</td>
+                                                    <td>{{ habilidade.habilidade }}</td>
+                                                    <td>{{ habilidade.prof_401 }}</td>
+                                                    <td>{{ habilidade.prof_403 }}</td>
+                                                    <td>{{ habilidade.prof_404 }}</td>
+                                                    <td>{{ habilidade.prof_406 }}</td>
+                                                    <td>{{ habilidade.prof_408 }}</td>
+                                                    <td>{{ habilidade.prof_409 }}</td>
+                                                    <td>{{ habilidade.prof_410 }}</td>
+                                                    <td>{{ habilidade.prof_413 }}</td>
+                                                    <td>{{ habilidade.prof_414 }}</td>
+                                                    <td>{{ habilidade.prof_415 }}</td>
+                                                    <td>{{ habilidade.prof_417 }}</td>
+                                                    <td>{{ habilidade.prof_421 }}</td>
+                                                    <td>{{ habilidade.prof_423 }}</td>
+                                                    <td>{{ habilidade.prof_426 }}</td>
+                                                    <td>{{ habilidade.prof_428 }}</td>
+                                                    <td>{{ habilidade.prof_429 }}</td>
+                                                    <td>{{ habilidade.prof_430 }}</td>
+                                                    <td>{{ habilidade.prof_431 }}</td>
+                                                    <td>{{ habilidade.prof_432 }}</td>
+                                                    <td>{{ habilidade.prof_433 }}</td>
+                                                    <td>{{ habilidade.prof_434 }}</td>
+                                                    <td>{{ habilidade.prof_435 }}</td>
+                                                    <td>{{ habilidade.prof_436 }}</td>
+                                                    <td>{{ habilidade.prof_437 }}</td>
+                                                    <td>{{ habilidade.prof_438 }}</td>
+                                                    <td>{{ habilidade.prof_439 }}</td>
+                                                    <td>{{ habilidade.prof_441 }}</td>
+                                                    <td>{{ habilidade.prof_442 }}</td>
+                                                    <td>{{ habilidade.prof_447 }}</td>
+                                                    <td>{{ habilidade.prof_451 }}</td>
+                                                    <td>{{ habilidade.prof_471 }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        
+        <!-- Footer -->
+        {% include 'footer.html' %}
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+</body>
+</html>

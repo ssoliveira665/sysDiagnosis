@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  {% include 'header.html' %}
+  <!-- SweetAlert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  {% include 'navbar.html' %}
+
+  <!-- Sidebar -->
+  {% include 'sidebar.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <!-- Card for Total Users -->
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{ total_users }}</h3>
+                <p>Total de Usuários</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <a href="#" class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- /.col -->
+
+          <!-- Card for Active Sessions -->
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ active_sessions }}</h3>
+                <p>Sessões Ativas</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-user-check"></i>
+              </div>
+              <a href="#" class="small-box-footer">Ver sessões <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- /.col -->
+
+          <!-- Card for Tasks Completed -->
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{ tasks_completed }}</h3>
+                <p>Tarefas Completas</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-tasks"></i>
+              </div>
+              <a href="#" class="small-box-footer">Ver tarefas <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- /.col -->
+
+          <!-- Card for Pending Requests -->
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{ pending_requests }}</h3>
+                <p>Pedidos Pendentes</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <a href="#" class="small-box-footer">Ver pedidos <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Widgets row -->
+        <div class="row">
+          <!-- Card for Recent Activity -->
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header border-0">
+                <h3 class="card-title">Atividade Recente</h3>
+                <div class="card-tools">
+                  <a href="#" class="btn btn-tool btn-sm">
+                    <i class="fas fa-download"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+                <ul class="products-list product-list-in-card pl-2 pr-2">
+                  <li class="item">
+                    <div class="product-info">
+                      <a href="javascript:void(0)" class="product-title">Atualização de Sistema
+                        <span class="badge badge-warning float-right">Importante</span></a>
+                      <span class="product-description">
+                        O sistema foi atualizado para a versão 1.2.
+                      </span>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div class="product-info">
+                      <a href="javascript:void(0)" class="product-title">Novo Relatório
+                        <span class="badge badge-info float-right">Novo</span></a>
+                      <span class="product-description">
+                        Relatório de desempenho disponível.
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-footer text-center">
+                <a href="javascript:void(0)" class="uppercase">Ver todas as atividades</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Task Overview Widget -->
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header border-0">
+                <h3 class="card-title">Visão Geral de Tarefas</h3>
+                <div class="card-tools">
+                  <a href="#" class="btn btn-tool btn-sm">
+                    <i class="fas fa-download"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+                <ul class="todo-list" data-widget="todo-list">
+                  <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                    <input type="checkbox" value="">
+                    <span class="text">Revisar relatório mensal</span>
+                    <small class="badge badge-danger"><i class="far fa-clock"></i> 2 horas</small>
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash"></i>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                    <input type="checkbox" value="">
+                    <span class="text">Atualizar gráficos de desempenho</span>
+                    <small class="badge badge-info"><i class="far fa-clock"></i> 4 horas</small>
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash"></i>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-footer clearfix">
+                <a href="#" class="btn btn-primary float-right">Adicionar Tarefa</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Footer -->
+  {% include 'footer.html' %}
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+
+<!-- SweetAlert Message Handling -->
+{% if messages %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      {% for message in messages %}
+        Swal.fire({
+          icon: '{% if message.tags == "error" %}error{% elif message.tags == "success" %}success{% endif %}',
+          title: '{% if message.tags == "error" %}Erro{% elif message.tags == "success" %}Sucesso{% endif %}',
+          text: '{{ message }}',
+        });
+      {% endfor %}
+    });
+  </script>
+{% endif %}
+
+</body>
+</html>

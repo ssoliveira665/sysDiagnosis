@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habilidades de Matemática</title>
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/dist/css/adminlte.min.css' %}">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        {% include 'navbar.html' %}
+        
+        <!-- Sidebar -->
+        {% include 'sidebar.html' %}
+        
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Tabela de Acertos e Erros dos Professores de Matemática</h1>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Upload Form -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Upload de Arquivo Excel</h5>
+                                    <form action="{% url 'upload_habilidades2' %}" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input type="file" name="excel_file" accept=".xlsx" required>
+                                        <button type="submit" class="btn btn-primary">Upload Excel</button>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.upload form -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Habilidade</th>
+                                                <th>300</th>
+                                                <th>301</th>
+                                                <th>302</th>
+                                                <th>305</th>
+                                                <th>306</th>
+                                                <th>308</th>
+                                                <th>310</th>
+                                                <th>317</th>
+                                                <th>318</th>
+                                                <th>319</th>
+                                                <th>320</th>
+                                                <th>323</th>
+                                                <th>324</th>
+                                                <th>328</th>
+                                                <th>329</th>
+                                                <th>330</th>
+                                                <th>331</th>
+                                                <th>333</th>
+                                                <th>338</th>
+                                                <th>339</th>
+                                                <th>341</th>
+                                                <th>342</th>
+                                                <th>343</th>
+                                                <th>344</th>
+                                                <th>345</th>
+                                                <th>346</th>
+                                                <th>347</th>
+                                                <th>348</th>
+                                                <th>350</th>
+                                                <th>351</th>
+                                                <th>352</th>
+                                                <th>353</th>
+                                                <th>354</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for habilidade in habilidades %}
+                                                <tr>
+                                                    <td>{{ habilidade.item }}</td>
+                                                    <td>{{ habilidade.habilidade }}</td>
+                                                    <td>{{ habilidade.professor_300 }}</td>
+                                                    <td>{{ habilidade.professor_301 }}</td>
+                                                    <td>{{ habilidade.professor_302 }}</td>
+                                                    <td>{{ habilidade.professor_305 }}</td>
+                                                    <td>{{ habilidade.professor_306 }}</td>
+                                                    <td>{{ habilidade.professor_308 }}</td>
+                                                    <td>{{ habilidade.professor_310 }}</td>
+                                                    <td>{{ habilidade.professor_317 }}</td>
+                                                    <td>{{ habilidade.professor_318 }}</td>
+                                                    <td>{{ habilidade.professor_319 }}</td>
+                                                    <td>{{ habilidade.professor_320 }}</td>
+                                                    <td>{{ habilidade.professor_323 }}</td>
+                                                    <td>{{ habilidade.professor_324 }}</td>
+                                                    <td>{{ habilidade.professor_328 }}</td>
+                                                    <td>{{ habilidade.professor_329 }}</td>
+                                                    <td>{{ habilidade.professor_330 }}</td>
+                                                    <td>{{ habilidade.professor_331 }}</td>
+                                                    <td>{{ habilidade.professor_333 }}</td>
+                                                    <td>{{ habilidade.professor_338 }}</td>
+                                                    <td>{{ habilidade.professor_339 }}</td>
+                                                    <td>{{ habilidade.professor_341 }}</td>
+                                                    <td>{{ habilidade.professor_342 }}</td>
+                                                    <td>{{ habilidade.professor_343 }}</td>
+                                                    <td>{{ habilidade.professor_344 }}</td>
+                                                    <td>{{ habilidade.professor_345 }}</td>
+                                                    <td>{{ habilidade.professor_346 }}</td>
+                                                    <td>{{ habilidade.professor_347 }}</td>
+                                                    <td>{{ habilidade.professor_348 }}</td>
+                                                    <td>{{ habilidade.professor_350 }}</td>
+                                                    <td>{{ habilidade.professor_351 }}</td>
+                                                    <td>{{ habilidade.professor_352 }}</td>
+                                                    <td>{{ habilidade.professor_353 }}</td>
+                                                    <td>{{ habilidade.professor_354 }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        
+        <!-- Footer -->
+        {% include 'footer.html' %}
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+</body>
+</html>

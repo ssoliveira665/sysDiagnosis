@@ -1,0 +1,18 @@
+<h1>Search Results</h1>
+<h2>Professors</h2>
+<ul>
+    {% for professor in professors %}
+    <li>{{ professor.name }}</li>
+    {% empty %}
+    <li>No professors found.</li>
+    {% endfor %}
+</ul>
+
+<h2>Alunos</h2>
+<ul>
+    {% for aluno in alunos %}
+    <li>{{ aluno.name }} - {{ aluno.ano }}</li>
+    {% empty %}
+    <li>No students found.</li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    {% include 'header.html' %}
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 400px;
+            width: 400px;
+        }
+
+        .chart-line-container {
+            position: relative;
+            margin: auto;
+            height: 100%;
+            width: 100%;
+        }
+
+        .chart-section {
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Sidebar -->
+    {% include 'sidebar.html' %}
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- Content Header -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard de Diagnoses</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Cards de Resumo com Percentuais -->
+                <div class="row">
+                    {% comment %}
+                    Calculando os percentuais com base nos totais
+                    {% endcomment %}
+                    {% with total_iniciais=total_acertos_iniciais|add:total_erros_iniciais|add:total_branco_iniciais %}
+                    {% with total_finais=total_acertos_finais|add:total_erros_finais|add:total_branco_portugues_finais %}
+
+                    <!-- Anos Iniciais - Acertos -->
+                    <div class="col-lg-2 col-4">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ percentual_acertos_iniciais |floatformat:2 }}%</h3>
+                                <p>Acertos - Iniciais</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anos Iniciais - Erros -->
+                    <div class="col-lg-2 col-4">
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>{{ percentual_erros_iniciais  |floatformat:2 }}%</h3>
+                                <p>Erros - Iniciais</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anos Iniciais - Branco -->
+                    <div class="col-lg-2 col-4">
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>{{ percentual_branco_iniciais |floatformat:2 }}%</h3>
+                                <p>Branco - Iniciais</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-minus-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anos Finais - Acertos -->
+                    <div class="col-lg-2 col-4">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ percentual_acertos_finais |floatformat:2 }}%</h3>
+                                <p>Acertos - Finais</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anos Finais - Erros -->
+                    <div class="col-lg-2 col-4">
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>{{ percentual_erros_finais |floatformat:2 }}%</h3>
+                                <p>Erros - Finais</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anos Finais - Branco -->
+                    <div class="col-lg-2 col-4">
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>{{ percentual_branco_portugues_finais |floatformat:2 }}%</h3>
+                                <p>Branco - Finais</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-minus-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {% endwith %}
+                    {% endwith %}
+                </div>
+
+                <!-- Gráficos de Pizza -->
+                <div class="row chart-section">
+                    <div class="col-lg-6">
+                        <h4>Anos Iniciais</h4>
+                        <div class="chart-container">
+                            <canvas id="chartIniciais"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>Anos Finais</h4>
+                        <div class="chart-container">
+                            <canvas id="chartFinais"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Linhas (Comparação) -->
+                <div class="row chart-section">
+                    <div class="col-lg-12">
+                        <h4>Indicadores - Comparação de Anos Iniciais e Finais</h4>
+                        <div class="chart-line-container">
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+</div>
+
+<!-- REQUIRED SCRIPTS -->
+<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+
+<!-- Scripts para gráficos -->
+<script>
+    const dataIniciais = {
+        labels: ['Acertos', 'Erros', 'Branco'],
+        datasets: [{
+            label: 'Anos Iniciais',
+            data: [{{ total_acertos_iniciais }}, {{ total_erros_iniciais }}, {{ total_branco_iniciais|default:"0" }}],
+            backgroundColor: ['#28a745', '#dc3545', '#ffc107']
+        }]
+    };
+
+    const dataFinais = {
+        labels: ['Acertos', 'Erros', 'Branco'],
+        datasets: [{
+            label: 'Anos Finais',
+            data: [{{ total_acertos_finais }}, {{ total_erros_finais }}, {{ total_branco_portugues_finais }}],
+            backgroundColor: ['#28a745', '#dc3545', '#ffc107']
+        }]
+    };
+
+    const configIniciais = {
+        type: 'doughnut',
+        data: dataIniciais,
+    };
+
+    const configFinais = {
+        type: 'doughnut',
+        data: dataFinais,
+    };
+
+    const chartIniciais = new Chart(
+        document.getElementById('chartIniciais'),
+        configIniciais
+    );
+
+    const chartFinais = new Chart(
+        document.getElementById('chartFinais'),
+        configFinais
+    );
+
+    const dataLineChart = {
+        labels: ['Anos Iniciais', 'Anos Finais'],
+        datasets: [
+            {
+                label: 'Acertos',
+                data: [{{ total_acertos_iniciais }}, {{ total_acertos_finais }}],
+                borderColor: '#28a745',
+                fill: false
+            },
+            {
+                label: 'Erros',
+                data: [{{ total_erros_iniciais }}, {{ total_erros_finais }}],
+                borderColor: '#dc3545',
+                fill: false
+            },
+            {
+                label: 'Branco',
+                data: [{{ total_branco_iniciais|default:"0" }}, {{ total_branco_portugues_finais }}],
+                borderColor: '#ffc107',
+                fill: false
+            }
+        ]
+    };
+
+    const configLineChart = {
+        type: 'line',
+        data: dataLineChart,
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Comparação de Acertos, Erros e Brancos'
+                }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Categorias'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Quantidade'
+                    }
+                }
+            }
+        }
+    };
+
+    const lineChart = new Chart(
+        document.getElementById('lineChart'),
+        configLineChart
+    );
+</script>
+
+</body>
+</html>

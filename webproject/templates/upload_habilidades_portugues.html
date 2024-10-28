@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Habilidades - Português</title>
+    <link rel="stylesheet" href="{% static 'assets/dist/css/styles.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert CDN -->
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <!-- Inclui o header -->
+    {% include 'header.html' %}
+
+    <!-- Inclui o navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Inclui o sidebar -->
+    {% include 'sidebar.html' %}
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        
+                        <!-- Conteúdo da página -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Upload de Habilidades - Português</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <!-- Formulário de upload da planilha de Português -->
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="planilha_portugues">Upload da Planilha de Habilidades de Português:</label>
+                                        <input type="file" name="planilha_portugues" class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </form>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Inclui o footer -->
+    {% include 'footer.html' %}
+
+    <!-- Inclua os scripts de JavaScript aqui -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+
+    <!-- SweetAlert -->
+    <script>
+        // Verifica se existem mensagens de sucesso ou erro
+        {% if messages %}
+            {% for message in messages %}
+                Swal.fire({
+                    icon: "{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% else %}info{% endif %}",
+                    title: "{% if message.tags == 'success' %}Sucesso{% elif message.tags == 'error' %}Erro{% else %}Informação{% endif %}",
+                    text: "{{ message }}",
+                    confirmButtonText: 'Ok'
+                });
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+</html>

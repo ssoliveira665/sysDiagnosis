@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Habilidades - Matemática e Português</title>
+    <link rel="stylesheet" href="{% static 'assets/dist/css/styles.css' %}">
+    <!-- Adicione outros arquivos de estilo aqui, caso necessário -->
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <!-- Inclui o header -->
+    {% include 'header.html' %}
+
+    <!-- Inclui o navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Inclui o sidebar -->
+    {% include 'sidebar.html' %}
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Conteúdo da página -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Upload de Habilidades - Matemática e Português</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <!-- Formulário de upload das planilhas -->
+                                <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="planilha_matematica">Upload da Planilha de Habilidades de Matemática:</label>
+                                        <input type="file" name="planilha_matematica" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="planilha_portugues">Upload da Planilha de Habilidades de Português:</label>
+                                        <input type="file" name="planilha_portugues" class="form-control" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Enviar</button>
+                                </form>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Inclui o footer -->
+    {% include 'footer.html' %}
+
+    <!-- Inclua os scripts de JavaScript aqui -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+</body>
+</html>

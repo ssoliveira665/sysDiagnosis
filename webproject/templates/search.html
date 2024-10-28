@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca por Habilidades</title>
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/dist/css/adminlte.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+    <!-- Incluindo navbar e sidebar -->
+    {% include 'navbar.html' %}
+    {% include 'sidebar.html' %}
+
+    <!-- Conteúdo principal -->
+    <div class="content-wrapper">
+
+        <!-- Cabeçalho da página -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Busca por Habilidades</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cards de Percentuais -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Card 1: Percentual de Habilidades de Português -->
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3 id="percentPortugues">0%</h3>
+                                <p>Habilidades de Português</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Percentual de Habilidades de Matemática -->
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3 id="percentMatematica">0%</h3>
+                                <p>Habilidades de Matemática</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Percentual de Desempenho de Alunos -->
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3 id="percentAlunos">0%</h3>
+                                <p>Desempenho de Alunos</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Percentual de Desempenho de Professores -->
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3 id="percentProfessores">0%</h3>
+                                <p>Desempenho de Professores</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Conteúdo da página -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <!-- Formulário de Busca -->
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Buscar por Habilidade e Filtros</h3>
+                    </div>
+                    <form method="GET" action="{% url 'search_view' %}">
+                        <div class="row p-3">
+                            <!-- Campo de busca por habilidade -->
+                            <div class="col-md-3">
+                                <label for="habilidade">Habilidade:</label>
+                                <input type="text" class="form-control" name="habilidade" placeholder="Digite a Habilidade" value="{{ request.GET.habilidade }}">
+                            </div>
+
+                            <!-- Filtro por Série
+                            <div class="col-md-2">
+                                <label for="serie">Série:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="serie_3" value="3" {% if request.GET.serie_3 %}checked{% endif %}>
+                                    <label class="form-check-label">3º Série</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="serie_4" value="4" {% if request.GET.serie_4 %}checked{% endif %}>
+                                    <label class="form-check-label">4º Série</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="serie_5" value="5" {% if request.GET.serie_5 %}checked{% endif %}>
+                                    <label class="form-check-label">5º Série</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="serie_6" value="6" {% if request.GET.serie_6 %}checked{% endif %}>
+                                    <label class="form-check-label">6º Série</label>
+                                </div>
+                            </div> -->
+
+                            <!-- Filtro por Disciplinas -->
+                            <div class="col-md-2">
+                                <label for="disciplina">Disciplina:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="disciplina_portugues" value="1" {% if request.GET.disciplina_portugues %}checked{% endif %}>
+                                    <label class="form-check-label">Português</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="disciplina_matematica" value="1" {% if request.GET.disciplina_matematica %}checked{% endif %}>
+                                    <label class="form-check-label">Matemática</label>
+                                </div>
+                            </div>
+
+                            <!-- Filtro por Tipo de Usuário -->
+                            <!-- <div class="col-md-2">
+                                <label for="tipo_usuario">Tipo de Usuário:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tipo_usuario_professor" value="1" {% if request.GET.tipo_usuario_professor %}checked{% endif %}>
+                                    <label class="form-check-label">Professor</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="tipo_usuario_aluno" value="1" {% if request.GET.tipo_usuario_aluno %}checked{% endif %}>
+                                    <label class="form-check-label">Aluno</label>
+                                </div>
+                            </div> -->
+
+                            <!-- Filtro por Anos de Ensino -->
+                            <div class="col-md-2">
+                                <label for="ano">Ano:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="ano_inicial" value="1" {% if request.GET.ano_inicial %}checked{% endif %}>
+                                    <label class="form-check-label">Anos Iniciais</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="ano_final" value="1" {% if request.GET.ano_final %}checked{% endif %}>
+                                    <label class="form-check-label">Anos Finais</label>
+                                </div>
+                            </div>
+
+
+                        <!-- Botão de buscar -->
+                        <div class="form-group mt-3 p-3 text-right">
+                            <button type="submit" class="btn btn-info">Buscar Por Habilidades</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Habilidades Filtradas</h3>
+                            </div>
+                            <div class="card-body">
+                                <!-- Tornando a tabela responsiva -->
+                                <div class="table-responsive">
+                                    <table id="habilidadesTable" class="table table-striped table-bordered display" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Habilidade</th>
+                                                <th>Descrição</th>
+                                                <th>Disciplina</th>
+                                                <th>Série</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Exibindo Habilidades de Português -->
+                                            {% for habilidade in habilidades_portugues %}
+                                                <tr>
+                                                    <td>{{ habilidade.habilidade }}</td>
+                                                    <td>{{ habilidade.descricao }}</td>
+                                                    <td>Português</td>
+                                                    <td>{{ habilidade.serie }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            
+                                            <!-- Exibindo Habilidades de Matemática -->
+                                            {% for habilidade in habilidades_matematica %}
+                                                <tr>
+                                                    <td>{{ habilidade.habilidade }}</td>
+                                                    <td>{{ habilidade.descricao }}</td>
+                                                    <td>Matemática</td>
+                                                    <td>{{ habilidade.serie }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                
+                
+                
+
+                <!-- Resultados de Habilidades
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Habilidades de Português</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    {% for habilidade in habilidades_portugues %}
+                                        <li>{{ habilidade.habilidade }} - {{ habilidade.descricao }}</li>
+                                    {% empty %}
+                                        <li>Nenhuma habilidade de Português encontrada.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Habilidades de Matemática</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    {% for habilidade in habilidades_matematica %}
+                                        <li>{{ habilidade.habilidade }} - {{ habilidade.descricao }}</li>
+                                    {% empty %}
+                                        <li>Nenhuma habilidade de Matemática encontrada.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                
+
+
+                <!-- Gráficos -->
+                <div class="row mt-4" id="chartsContainer">
+                    <!-- Gráfico de Alunos -->
+                    <div class="col-md-6" id="alunosChartContainer">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Alunos</h3>
+                            </div>
+                            <div class="card-body">
+                                <!-- Somatório de Habilidades de Alunos -->
+                                <p><strong> </strong><span id="sumAlunos"></span></p>
+                                <canvas id="alunosChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Professores -->
+                    <div class="col-md-6" id="professoresChartContainer">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Professores</h3>
+                            </div>
+                            <div class="card-body">
+                                <!-- Somatório de Habilidades de Professores -->
+                                <p><strong> </strong><span id="sumProfessores"></span></p>
+                                <canvas id="professoresChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Inclui o footer -->
+    {% include 'footer.html' %}
+</div>
+
+<!-- Scripts necessários -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+
+<!-- Script para inicializar DataTables -->
+<script>
+    $(document).ready(function() {
+        $('#habilidadesTable').DataTable({
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'print'
+            ],
+            paging: true,
+            pageLength: 10,
+        });
+    });
+</script>
+
+<!-- Scripts para Gráficos -->
+<script>
+    const dataAlunos = {{ data_alunos|safe }};
+    const dataProfessores = {{ data_professores|safe }};
+    
+    // Variáveis dinâmicas passadas pelo Django
+    const chartLabel = '{{ chart_label }}';
+    const tipoUsuarioAluno = '{{ tipo_usuario_aluno }}';
+    const tipoUsuarioProfessor = '{{ tipo_usuario_professor }}';
+
+    // Função para calcular percentuais
+function calculatePercentage(part, total) {
+    if (total === 0) return 0;  // Evita divisão por zero
+    return (part / total) * 100;
+}
+
+// Calculando o percentual de acertos e erros de alunos
+const totalAlunos = dataAlunos.acertos[0] + dataAlunos.erros[0];
+const percentualAcertosAlunos = calculatePercentage(dataAlunos.acertos[0], totalAlunos);
+const percentualErrosAlunos = calculatePercentage(dataAlunos.erros[0], totalAlunos);
+
+// Calculando o percentual de acertos e erros de professores
+const totalProfessores = dataProfessores.acertos[0] + dataProfessores.erros[0];
+const percentualAcertosProfessores = calculatePercentage(dataProfessores.acertos[0], totalProfessores);
+const percentualErrosProfessores = calculatePercentage(dataProfessores.erros[0], totalProfessores);
+
+// Ajustando o título do gráfico dinamicamente de acordo com o filtro
+let titleAlunos = 'Alunos';
+let titleProfessores = 'Professores';
+
+if (tipoUsuarioAluno) {
+    titleAlunos = `Alunos em ${chartLabel}`;
+}
+if (tipoUsuarioProfessor) {
+    titleProfessores = `Professores em ${chartLabel}`;
+}
+
+// Gráfico de Alunos (em Percentuais)
+const ctxAlunos = document.getElementById('alunosChart').getContext('2d');
+new Chart(ctxAlunos, {
+    type: 'bar',
+    data: {
+        labels: ['Acertos (%)', 'Erros (%)'],
+        datasets: [{
+            label: titleAlunos,
+            data: [percentualAcertosAlunos, percentualErrosAlunos],
+            backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)'],
+            borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value) {
+                        return value + '%';  // Exibe o valor como percentual
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Gráfico de Professores (em Percentuais)
+const ctxProfessores = document.getElementById('professoresChart').getContext('2d');
+new Chart(ctxProfessores, {
+    type: 'bar',
+    data: {
+        labels: ['Acertos (%)', 'Erros (%)'],
+        datasets: [{
+            label: titleProfessores,
+            data: [percentualAcertosProfessores, percentualErrosProfessores],
+            backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)'],
+            borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value) {
+                        return value + '%';  // Exibe o valor como percentual
+                    }
+                }
+            }
+        }
+    }
+});
+
+
+</script>
+
+
+<!-- Script para calcular percentuais e exibir nos cards -->
+<script>
+    // Exibindo os percentuais nos cards
+    document.getElementById('percentPortugues').innerText = percentualAcertosAlunos.toFixed(2) + '%';
+    document.getElementById('percentMatematica').innerText = percentualAcertosProfessores.toFixed(2) + '%';
+    document.getElementById('percentAlunos').innerText = percentualAcertosAlunos.toFixed(2) + '%';
+    document.getElementById('percentProfessores').innerText = percentualAcertosProfessores.toFixed(2) + '%';
+</script>
+
+
+</body>
+</html>

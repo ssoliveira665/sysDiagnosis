@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habilidades - Português 5º e 9º</title>
+    <link rel="stylesheet" href="{% static 'assets/dist/css/styles.css' %}">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <!-- Inclui o header -->
+    {% include 'header.html' %}
+
+    <!-- Inclui o navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Inclui o sidebar -->
+    {% include 'sidebar.html' %}
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Conteúdo da página -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Habilidades - Matemática 5º e 9º Ano</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Série</th>
+                                            <th>Tópico</th>
+                                            <th>Habilidade</th>
+                                            <th>Descrição</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Loop sobre os dados vindos do banco de dados -->
+                                        {% for habilidade in habilidades %}
+                                            <tr>
+                                                <td>{{ habilidade.serie }}</td>
+                                                <td>{{ habilidade.topico }}</td>
+                                                <td>{{ habilidade.habilidade }}</td>
+                                                <td>{{ habilidade.descricao }}</td>
+                                            </tr>
+                                        {% empty %}
+                                            <tr>
+                                                <td colspan="4">Nenhuma habilidade encontrada.</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Inclui o footer -->
+    {% include 'footer.html' %}
+
+    <!-- Inclua os scripts de JavaScript aqui -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+</body>
+</html>

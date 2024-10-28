@@ -1,0 +1,20 @@
+<!-- upload_page_matematica.html -->
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="planilha">Selecione a planilha de Excel</label>
+        <input type="file" name="planilha" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Carregar Planilha</button>
+</form>
+
+<!-- Display Messages -->
+{% if messages %}
+    <div class="mt-3">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

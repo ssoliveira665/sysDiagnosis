@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes das Habilidades</title>
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/dist/css/adminlte.min.css' %}">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+    <!-- Incluindo navbar e sidebar -->
+    {% include 'navbar.html' %}
+    {% include 'sidebar.html' %}
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Detalhes das Habilidades</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+
+                <!-- Formulário para selecionar a habilidade -->
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Selecionar Habilidade</h3>
+                    </div>
+                    <form method="GET" action="{% url 'habilidades_detalhadas_view' %}">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="habilidade">Habilidade</label>
+                                <input type="text" class="form-control" name="habilidade" placeholder="Digite a Habilidade" value="{{ request.GET.habilidade }}">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-info">Buscar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Resultados: Alunos e Professores -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Séries dos Alunos</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    {% for aluno in alunos %}
+                                        <li>Série: {{ aluno.serie }} - Habilidade: {{ aluno.habilidade }} - Descrição: {{ aluno.descricao_habilidade }}</li>
+                                    {% empty %}
+                                        <li>Nenhuma habilidade encontrada para alunos.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Números dos Professores</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    {% for professor in professores %}
+                                        <li>Professor: {{ professor.nome }} - Habilidade: {{ professor.habilidade }} - Tópico: {{ professor.topico }}</li>
+                                    {% empty %}
+                                        <li>Nenhuma habilidade encontrada para professores.</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Inclui o footer -->
+    {% include 'footer.html' %}
+    
+</div>
+
+<!-- Scripts necessários -->
+<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+
+</body>
+</html>

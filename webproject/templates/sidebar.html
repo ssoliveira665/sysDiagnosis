@@ -1,0 +1,234 @@
+{% load static %}
+<!-- Inclui o header -->
+{% include 'header.html' %}
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{% url 'dashboard' %}" class="brand-link">
+        <img src="{% static 'assets/dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3" style="opacity: 0.8" />
+        <span class="brand-text font-weight-light">SEMED GESTÃO</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{% static 'assets/dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2"
+                    alt="User Image" />
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{ request.user.username }}</a>
+            </div>
+        </div>
+
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                    aria-label="Search" />
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Diagnoses Section -->
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            SAMACC
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <!-- SAMAACC Prof -->
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-tie"></i>
+                                <p>Professor</p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <!-- Anos Iniciais -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                        <p>Anos Iniciais</p>
+                                        <i class="right fas fa-angle-left"></i>
+                                    </a>
+                                    <ul class="nav nav-treeview ml-3">
+                                        <!-- Links para Professores -->
+                                        <li class="nav-item">
+                                            <a href="{% url 'lingua_portuguesa_prof_view' %}" class="nav-link">
+                                                <i class="nav-icon fas fa-book"></i>
+                                                <p>Português Professor</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{% url 'lingua_matematica_prof_view' %}" class="nav-link">
+                                                <i class="nav-icon fas fa-book"></i>
+                                                <p>Matemática Professor</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Anos Finais -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-chalkboard"></i>
+                                        <p>Anos Finais</p>
+                                        <i class="right fas fa-angle-left"></i>
+                                    </a>
+                                    <ul class="nav nav-treeview ml-3">
+                                        <li class="nav-item">
+                                            <a href="{% url 'lingua_portuguesa_prof_finais_view' %}" class="nav-link">
+                                                <i class="fas fa-user"></i>
+                                                <p>Português Professor</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{% url 'matematica_prof_finais_view' %}" class="nav-link">
+                                                <i class="fas fa-user"></i>
+                                                <p>Matemática Professor</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- SAMAACC Aluno -->
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-graduate"></i>
+                                <p>Aluno</p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview ml-3">
+                                <!-- Anos Iniciais -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-school"></i>
+                                        <p>Anos Iniciais</p>
+                                        <i class="right fas fa-angle-left"></i>
+                                    </a>
+                                    <ul class="nav nav-treeview ml-3">
+                                        <!-- Links para Alunos -->
+                                        <li class="nav-item">
+                                            <a href="{% url 'aluno_portugues_view' %}" class="nav-link">
+                                                <i class="nav-icon fas fa-book-reader"></i>
+                                                <p>Português Aluno</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{% url 'matematica_aluno_view' %}" class="nav-link">
+                                                <i class="nav-icon fas fa-calculator"></i>
+                                                <p>Matemática Aluno</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Anos Finais -->
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fas fa-chalkboard"></i>
+                                        <p>Anos Finais</p>
+                                        <i class="right fas fa-angle-left"></i>
+                                    </a>
+                                    <ul class="nav nav-treeview ml-3">
+                                        <li class="nav-item">
+                                            <a href="{% url 'lingua_portuguesa_prof_finais_view' %}" class="nav-link">
+                                                <i class="fas fa-book-open"></i>
+                                                <p>Português Aluno</p>
+                                            </a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a href="{% url 'lingua_portuguesa_prof_finais_view' %}" class="nav-link">
+                                                <i class="fas fa-square-root-alt"></i>
+                                                <p>Matemática Aluno</p>
+                                            </a>
+                                        </li>
+                                        
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Habilidades Section -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-brain"></i>
+                                <p>Habilidades</p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview ml-3">
+                                <li class="nav-item">
+                                    <a href="{% url 'habilidades_portugues_view' %}" class="nav-link">
+                                        <i class="fas fa-book-open"></i>
+                                        <p>Português 5º e 9º</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{% url 'habilidades_matematica_view' %}" class="nav-link">
+                                        <i class="fas fa-calculator"></i>
+                                        <p>Matemática 5º e 9º</p>
+                                    </a>
+                                </li>
+
+                                <!-- Upload Habilidades -->
+                                <li class="nav-item">
+                                    <a href="{% url 'upload_habilidades_portugues_view' %}" class="nav-link">
+                                        <i class="fas fa-upload"></i>
+                                        <p>Upload Português</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{% url 'upload_habilidades_matematica_view' %}" class="nav-link">
+                                        <i class="fas fa-upload"></i>
+                                        <p>Upload Matemática</p>
+                                    </a>
+                                </li>
+
+                                
+                                
+
+                            </ul>
+                            <li class="nav-item">
+                                <a href="{% url 'search_view' %}" class="nav-link">
+                                    <i class="fas fa-upload"></i>
+                                    <p>Filtros e Buscas</p>
+                                </a>
+                            </li>
+                        </li>
+                    </ul>
+
+                    <!-- Logout -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                        {% csrf_token %}
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>

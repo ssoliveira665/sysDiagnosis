@@ -1,0 +1,20 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Série</th>
+            <th>Tópico</th>
+            <th>Habilidade</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for habilidade in habilidades %}
+        <tr>
+            <td>{{ habilidade.serie }}</td>
+            <td>{{ habilidade.topico }}</td>
+            <td>{{ habilidade.habilidade }}</td>
+            <td>{{ habilidade.descricao }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

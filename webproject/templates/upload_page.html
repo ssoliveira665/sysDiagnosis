@@ -1,0 +1,17 @@
+<!-- upload_page.html -->
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <label for="planilha">Selecione a planilha de Excel</label>
+        <input type="file" name="planilha" required>
+    </div>
+    <button type="submit">Carregar Planilha</button>
+</form>
+
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}

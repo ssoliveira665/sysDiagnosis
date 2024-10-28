@@ -1,0 +1,121 @@
+<!-- websystem/templates/webapp/logout.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semed | Logout</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/logocanaa2.ico' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/dist/css/adminlte.min.css' %}">
+    <style>
+        /* Custom CSS to disable sidebar and navbar links */
+        .logout-page .main-header .navbar-nav a,
+        .logout-page .main-sidebar a {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* Custom CSS for the logout page */
+        .logout-page .content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f6f9;
+        }
+
+        .logout-page .card {
+            max-width: 500px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logout-page .card-body {
+            text-align: center;
+        }
+
+        .logout-page .card-body h5 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #28a745;
+        }
+
+        .logout-page .card-body p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .logout-page .card-body a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .logout-page .card-body a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini logout-page">
+<div class="wrapper">
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    {% include 'sidebar.html' %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Você foi desconectado com sucesso!</h5>
+                                <p class="card-text">
+                                    Clique <a href="{% url 'login' %}">aqui</a> para fazer login novamente.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-md-12 -->
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+        <div class="p-3">
+            <h5>Title</h5>
+            <p>Sidebar content</p>
+        </div>
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+    {% include 'footer.html' %}
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+</body>
+</html>
